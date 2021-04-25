@@ -16,6 +16,7 @@ namespace Home_Office_Solutions.Controllers
         public StationaryItemsController(ShopContext context)
         {
             _context = context;
+            _context.Database.EnsureCreated();
         }
 
         // GET: StationaryItems

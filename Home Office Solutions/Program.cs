@@ -14,18 +14,17 @@ namespace Home_Office_Solutions
     {
         public static void Main(string[] args)
         {
+            /*Shop shop1 = new Shop() { ShopName = "das", ShopAddress = "dzxczasd" };
+            Shop shop2 = new Shop() { ShopName = "dadsas", ShopAddress = "dascxzcd" };
+            Shop shop3 = new Shop() { ShopName = "daeqw431s", ShopAddress = "davczxcsd" };
 
-            StationaryItem stat1 = new StationaryItem() {Name ="£", ProductType= ProductType.Diary, Brand= "das", Color = "sad"};
-            StationaryItem stat2 = new StationaryItem() { Name = "£wqeq", ProductType = ProductType.Diary, Brand = "das", Color = "sad" };
-            StationaryItem stat3 = new StationaryItem() { Name = "£das", ProductType = ProductType.Diary, Brand = "das", Color = "sad" };
+            ShopContext ctx = new ShopContext();
+            ctx.Database.EnsureCreated();
 
-            ShopContext txz = new ShopContext();
-            txz.Database.EnsureCreated();
-            txz.stationaryItems.Add(stat1);
-            txz.stationaryItems.Add(stat2);
-            txz.stationaryItems.Add(stat3);
-            txz.SaveChanges();
-            
+            ctx.Shops.Add(shop1);
+            ctx.Shops.Add(shop2);
+            ctx.Shops.Add(shop3);*/
+
             CreateHostBuilder(args).Build().Run();
         }
 

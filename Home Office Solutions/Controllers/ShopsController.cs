@@ -16,6 +16,8 @@ namespace Home_Office_Solutions.Controllers
         public ShopsController(ShopContext context)
         {
             _context = context;
+            _context.Database.EnsureCreated();
+            //_context.DataBase.Migrate();
         }
 
         // GET: Shops
