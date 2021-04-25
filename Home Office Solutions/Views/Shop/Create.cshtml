@@ -5,34 +5,42 @@
 }
 
 <h1>Create</h1>
+<div class="form-horizontal">
+    <h4>Shop</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="ShopName" class="control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="ShopName" class="form-control" />
+                        <span asp-validation-for="ShopName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ShopAddress" class="control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="ShopAddress" class="form-control" />
+                        <span asp-validation-for="ShopAddress" class="text-danger"></span>
+                    </div>
+                </div>
 
-<h4>Shop</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ShopAddress" class="control-label"></label>
-                <input asp-for="ShopAddress" class="form-control" />
-                <span asp-validation-for="ShopAddress" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ShopName" class="control-label"></label>
-                <input asp-for="ShopName" class="form-control" />
-                <span asp-validation-for="ShopName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                    </div>
+            </form>
+        </div>
     </div>
-</div>
+    </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

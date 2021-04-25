@@ -47,7 +47,7 @@ namespace Home_Office_Solutions
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Shops}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

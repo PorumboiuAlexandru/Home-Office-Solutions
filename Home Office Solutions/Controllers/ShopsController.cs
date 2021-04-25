@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Home_Office_Solutions.Models;
+using System.Data;
 
 namespace Home_Office_Solutions.Controllers
 {
@@ -21,8 +22,18 @@ namespace Home_Office_Solutions.Controllers
         }
 
         // GET: Shops
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Shopname_Desc" : "";
+            var shops = from s in _context.Shops
+                        select s;
+            switch (sortOrder)
+            {
+                default:
+                    shops = shops.OrderBy(s => s.ShopName);
+                    break;
+            }
+
             return View(await _context.Shops.ToListAsync());
         }
 
@@ -57,12 +68,20 @@ namespace Home_Office_Solutions.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ShopID,ShopAddress,ShopName")] Shop shop)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(shop);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(shop);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Unable to Save Changes. Please Try Again.");
+            }
+
             return View(shop);
         }
 
@@ -118,13 +137,16 @@ namespace Home_Office_Solutions.Controllers
         }
 
         // GET: Shops/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError =false)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Delete has failed. Please Try Again.";
+            }
             var shop = await _context.Shops
                 .FirstOrDefaultAsync(m => m.ShopID == id);
             if (shop == null)
@@ -140,9 +162,16 @@ namespace Home_Office_Solutions.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var shop = await _context.Shops.FindAsync(id);
-            _context.Shops.Remove(shop);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var shop = await _context.Shops.FindAsync(id);
+                _context.Shops.Remove(shop);
+                await _context.SaveChangesAsync();
+            }
+            catch (DataException)
+            {
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            }
             return RedirectToAction(nameof(Index));
         }
 
@@ -150,5 +179,6 @@ namespace Home_Office_Solutions.Controllers
         {
             return _context.Shops.Any(e => e.ShopID == id);
         }
+
     }
 }
