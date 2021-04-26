@@ -13,6 +13,8 @@ namespace Home_Office_Solutions.Controllers
     {
         private readonly ShopContext _context;
 
+        
+
         public StocksController(ShopContext context)
         {
             _context = context;
@@ -41,14 +43,16 @@ namespace Home_Office_Solutions.Controllers
             {
                 return NotFound();
             }
-
+            //ViewBag.ProductID = new SelectList(_context.stationaryItems, "ProductID", "Name", stock.ProductID); //test view 
             return View(stock);
         }
 
         // GET: Stocks/Create
         public IActionResult Create()
         {
+
             ViewData["ShopID"] = new SelectList(_context.Shops, "ShopID", "ShopAddress");
+            ViewData["ProductID"] = new SelectList(_context.stationaryItems, "ProductID", "Name");
             return View();
         }
 
@@ -66,6 +70,7 @@ namespace Home_Office_Solutions.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ShopID"] = new SelectList(_context.Shops, "ShopID", "ShopAddress", stock.ShopID);
+            ViewData["ProductID"] = new SelectList(_context.stationaryItems, "ProductID", "Name", stock.ProductID);
             return View(stock);
         }
 
@@ -83,6 +88,7 @@ namespace Home_Office_Solutions.Controllers
                 return NotFound();
             }
             ViewData["ShopID"] = new SelectList(_context.Shops, "ShopID", "ShopAddress", stock.ShopID);
+            ViewData["ProductID"] = new SelectList(_context.stationaryItems, "ProductID", "Name", stock.ProductID);
             return View(stock);
         }
 
@@ -119,6 +125,7 @@ namespace Home_Office_Solutions.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ShopID"] = new SelectList(_context.Shops, "ShopID", "ShopAddress", stock.ShopID);
+            ViewData["ProductID"] = new SelectList(_context.stationaryItems, "ProductID", "Name", stock.ProductID);
             return View(stock);
         }
 
