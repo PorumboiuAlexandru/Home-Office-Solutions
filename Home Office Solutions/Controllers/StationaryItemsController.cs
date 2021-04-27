@@ -18,10 +18,16 @@ namespace Home_Office_Solutions.Controllers
             _context = context;
             _context.Database.EnsureCreated();
         }
-
         // GET: StationaryItems
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchName = "")
         {
+            var name = from Name in _context.stationaryItems
+                       select Name;
+
+            if (!String.IsNullOrEmpty(searchName))
+            {
+            name = name.Where(p => p.Name.Contains(searchName));
+            }
             return View(await _context.stationaryItems.ToListAsync());
         }
 
