@@ -10,7 +10,9 @@ namespace Home_Office_Solutions.Models
     {
         [Required]
         public int StockID { get; set; }
+        [Display(Name = "Product Name")]
         public int ProductID { get; set; }
+        [Display(Name = "Shop Name")]
         public int ShopID { get; set; }
         [Required]
         public double Price { get; set; }

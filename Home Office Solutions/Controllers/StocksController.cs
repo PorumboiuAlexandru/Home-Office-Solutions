@@ -43,6 +43,8 @@ namespace Home_Office_Solutions.Controllers
             {
                 return NotFound();
             }
+            ViewData["ShopID"] = new SelectList(_context.Shops, "ShopID", "ShopAddress");
+            ViewData["ProductID"] = new SelectList(_context.stationaryItems, "ProductID", "Name");
             //ViewBag.ProductID = new SelectList(_context.stationaryItems, "ProductID", "Name", stock.ProductID); //test view 
             return View(stock);
         }
