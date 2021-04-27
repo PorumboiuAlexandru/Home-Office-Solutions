@@ -8,7 +8,7 @@ namespace Home_Office_Solutions.Models
 {
     public class ShopContext : DbContext
     {
-        private const string connectionString = "Server=(localdb)\\mssqllocaldb;Database=HomeOfficeSolutions1;Trusted_Connection=False;";
+        private const string connectionString = "Server=(localdb)\\mssqllocaldb;Database=HomeOfficeSolutions3;Trusted_Connection=False;";
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

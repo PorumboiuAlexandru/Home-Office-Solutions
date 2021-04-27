@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h2>Stationary Items</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -51,7 +51,9 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ProductID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ProductID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProductID">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.ProductID">Delete</a> |
+                <a asp-action="CheckSuppliers" asp-route-id="@item.ProductID">CheckSuppliers</a>
+
             </td>
         </tr>
 }
