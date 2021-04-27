@@ -43,6 +43,27 @@ namespace Home_Office_Solutions.Controllers
             return View(stationaryItem);
         }
 
+        // GET: StationaryItems/CheckSuppliers/5
+        public async Task<IActionResult> CheckSuppliers(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var stationaryItem = await _context.stationaryItems
+                .FirstOrDefaultAsync(m => m.ProductID == id);
+
+            var stationaryItemStock = stationaryItem.Stocks;
+
+            if (stationaryItem == null)
+            {
+                return NotFound();
+            }
+
+            return View(stationaryItemStock);
+        }
+
         // GET: StationaryItems/Create
         public IActionResult Create()
         {
