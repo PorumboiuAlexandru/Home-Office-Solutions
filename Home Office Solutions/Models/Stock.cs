@@ -15,6 +15,7 @@ namespace Home_Office_Solutions.Models
         [Display(Name = "Shop Name")]
         public int ShopID { get; set; }
         [Required]
+        [Display(Name = "Price €")]
         public double Price { get; set; }
 
         public virtual Shop Shop { set; get; }
