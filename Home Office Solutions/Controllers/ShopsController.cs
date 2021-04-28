@@ -22,11 +22,17 @@ namespace Home_Office_Solutions.Controllers
         }
 
         // GET: Shops
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Shopname_Desc" : "";
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["CurrentFilter"] = searchString;
             var shops = from s in _context.Shops
                         select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                shops = shops.Where(s => s.ShopName.Contains(searchString)
+                                       || s.ShopAddress.Contains(searchString));
+            }
             switch (sortOrder)
             {
                 default:
@@ -34,7 +40,7 @@ namespace Home_Office_Solutions.Controllers
                     break;
             }
 
-            return View(await _context.Shops.ToListAsync());
+            return View(await shops.AsNoTracking().ToListAsync());
         }
 
         // GET: Shops/Details/5

@@ -19,16 +19,28 @@ namespace Home_Office_Solutions.Controllers
             _context.Database.EnsureCreated();
         }
         // GET: StationaryItems
-        public async Task<IActionResult> Index(string searchName = "")
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
-            var name = from Name in _context.stationaryItems
-                       select Name;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["CurrentFilter"] = searchString;
 
-            if (!String.IsNullOrEmpty(searchName))
+            var name = from s in _context.stationaryItems
+                       select s;
+            if (!String.IsNullOrEmpty(searchString))
             {
-            name = name.Where(p => p.Name.Contains(searchName));
+                name = name.Where(s => s.Name.Contains(searchString) || s.Color.Contains(searchString) || s.Brand.Contains(searchString));
             }
-            return View(await _context.stationaryItems.ToListAsync());
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    name = name.OrderByDescending(s => s.Name);
+                    break;
+                default:
+                    name = name.OrderBy(s => s.Name);
+                    break;
+            }
+
+            return View(await name.AsNoTracking().ToListAsync());
         }
 
         // GET: StationaryItems/Details/5
