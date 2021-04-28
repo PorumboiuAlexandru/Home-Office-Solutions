@@ -24,7 +24,7 @@ namespace Home_Office_Solutions.Controllers
         // GET: Stocks
         public async Task<IActionResult> Index()
         {
-            var shopContext = _context.stocks.Include(s => s.Shop);
+            var shopContext = _context.stocks.Include(s => s.Shop).AsNoTracking();
             return View(await shopContext.ToListAsync());
         }
 

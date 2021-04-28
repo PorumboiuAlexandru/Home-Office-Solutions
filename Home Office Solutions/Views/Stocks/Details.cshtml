@@ -12,7 +12,13 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.LabelFor(model => model.ProductID, "Product Name")
+            @Html.LabelFor(model => model.ProductID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProductID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.LabelFor(model => model.StationaryItem.Name)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.StationaryItem.Name)
@@ -27,7 +33,7 @@
             @Html.DisplayNameFor(model => model.Shop)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Shop.ShopAddress)
+            @Html.DisplayFor(model => model.Shop.ShopAddress, "Shop Address")
         </dd>
     </dl>
 </div>
