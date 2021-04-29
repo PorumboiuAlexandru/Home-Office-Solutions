@@ -44,6 +44,8 @@ namespace Home_Office_Solutions.Controllers
         }
 
         // GET: StationaryItems/Details/5
+ 
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -51,36 +53,21 @@ namespace Home_Office_Solutions.Controllers
                 return NotFound();
             }
 
-            var stationaryItem = await _context.stationaryItems
-                .FirstOrDefaultAsync(m => m.ProductID == id);
-            if (stationaryItem == null)
+            var stationaryitem = await _context.stationaryItems
+                 .Include(s => s.Stocks).ThenInclude(e => e.Shop)
+                 .AsNoTracking()
+                 .FirstOrDefaultAsync(m => m.ProductID == id);
+
+            if (stationaryitem == null)
             {
                 return NotFound();
             }
 
-            return View(stationaryItem);
+            return View(stationaryitem);
         }
 
-        // GET: StationaryItems/CheckSuppliers/5
-        public async Task<IActionResult> CheckSuppliers(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var stationaryItem = await _context.stationaryItems
-                .FirstOrDefaultAsync(m => m.ProductID == id);
 
-            var stationaryItemStock = stationaryItem.Stocks;
-
-            if (stationaryItem == null)
-            {
-                return NotFound();
-            }
-
-            return View(stationaryItemStock);
-        }
 
         // GET: StationaryItems/Create
         public IActionResult Create()
