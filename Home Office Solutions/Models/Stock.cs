@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Home_Office_Solutions.Models
 {
-    public class Stock
+    public class Stock 
     {
         [Required]
         public int StockID { get; set; }

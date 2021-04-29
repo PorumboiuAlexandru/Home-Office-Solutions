@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Home_Office_Solutions.Models;
 
 namespace Home_Office_Solutions.Models
 {
@@ -19,5 +20,7 @@ namespace Home_Office_Solutions.Models
         public DbSet<StationaryItem> stationaryItems { set; get; }
 
         public DbSet<Stock> stocks { set; get; }
+
+        public DbSet<Home_Office_Solutions.Models.StockShopAddress> StockShopAddress { get; set; }
     }
 }

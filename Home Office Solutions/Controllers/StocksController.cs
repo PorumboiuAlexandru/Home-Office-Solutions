@@ -20,21 +20,43 @@ namespace Home_Office_Solutions.Controllers
             _context = context;
             _context.Database.EnsureCreated();
         }
-
+        private IEnumerable<StockShopAddress> StockShoplist
+        {
+            get => from s in _context.stocks
+                   join st in _context.stationaryItems
+                   on s.ProductID equals st.ProductID
+                   join sh in _context.Shops
+                   on s.ShopID equals sh.ShopID
+                   select new StockShopAddress { Name = st.Name, ProductID = st.ProductID, ShopName = sh.ShopName, ShopID = sh.ShopID, ShopAddress = sh.ShopAddress, Price = s.Price, StockID = s.StockID };
+        }
         // GET: Stocks
         public async Task<IActionResult> Index()
         {
-            var shopContext = _context.stocks.Include(s => s.Shop).AsNoTracking();
-            return View(await shopContext.ToListAsync());
+            
+
+            return View(StockShoplist);
+/*
+            var shopContext = _context.stocks.Include(s => s.Shop);
+            return View(await shopContext.ToListAsync());*/
         }
 
         // GET: Stocks/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
+            /*if (id == null)
             {
                 return NotFound();
             }
+            if (pd == null)
+            {
+                return NotFound();
+            }
+            if (st == null)
+            {
+                return NotFound();
+            }*/
+
+            StockShopAddress ssfound = StockShoplist.FirstOrDefault(p => p.ProductID == id);
 
             var stock = await _context.stocks
                 .Include(s => s.Shop)
@@ -45,8 +67,12 @@ namespace Home_Office_Solutions.Controllers
             }
             ViewData["ShopID"] = new SelectList(_context.Shops, "ShopID", "ShopAddress");
             ViewData["ProductID"] = new SelectList(_context.stationaryItems, "ProductID", "Name");
-            //ViewBag.ProductID = new SelectList(_context.stationaryItems, "ProductID", "Name", stock.ProductID); //test view 
-            return View(stock);
+            /*Shop foundShop = _context.Shops.FirstOrDefault(p => p.ShopID == id);
+            StationaryItem foundItem = _context.stationaryItems.FirstOrDefault(p => p.ProductID == pd);
+            Stock foundStock = _context.stocks.FirstOrDefault(p => p.StockID == st);
+            ViewModel vm1 = new ViewModel() { Shop = foundShop, StationaryItem = foundItem, Stock = foundStock};*/
+           
+            return View(ssfound);
         }
 
         // GET: Stocks/Create
