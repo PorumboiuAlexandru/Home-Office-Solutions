@@ -14,6 +14,7 @@ namespace Home_Office_Solutions.Models
         [Required(ErrorMessage = "A Name is required for this field")]
         public string Name { get; set; }
         [Required(ErrorMessage = "A Product Type is required for this field")]
+        [Display(Name = "Product Type")]
         public ProductType ProductType { get; set; }
         [Required(ErrorMessage = " A product brand/manufacturer is required for this field")]
         public string Brand { get; set; }

@@ -4,10 +4,10 @@
     ViewData["Title"] = "Item Details";
 }
 
-<h1>Details</h1>
+<h2>Stationary Item</h2>
 
 <div>
-    <h4>StationaryItem</h4>
+    <h5>Product Details</h5>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -33,26 +33,6 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Color)
-        </dd>
-
-        <dd class="col-sm-10">
-            <table class="table">
-                <tr>
-                    <th>Shop</th>
-                    <th>Price</th>
-                </tr>
-                @foreach (var item in Model.Stocks)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Shop)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Price)
-                        </td>
-                    </tr>
-                }
-            </table>
         </dd>
     </dl>
 </div>
