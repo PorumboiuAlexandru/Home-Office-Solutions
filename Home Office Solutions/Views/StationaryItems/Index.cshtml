@@ -7,14 +7,15 @@
 <h2>Stationary Items</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Add New Item</a>
 </p>
 <form asp-action="Index" method="get">
     <div class="form-actions no-color">
         <p>
             Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-default" /> |
-            <a asp-action="Index">Back to Full List</a>
+            <input type="submit" value="Search" class="btn btn-outline-info" />
+            <button value="Return" class="btn btn-outline-info">  <a asp-action="Index">Return Full List </a></button>
+
         </p>
     </div>
 </form>
