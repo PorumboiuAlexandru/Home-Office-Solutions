@@ -20,6 +20,7 @@ namespace Home_Office_Solutions.Models
         public string Brand { get; set; }
         [Required(ErrorMessage = "Product Color is required for this field")]
         public string Color { get; set; }
+        public string ProductDescription { get; set; }
 
         public virtual ICollection<Stock> Stocks { get; set; }
 

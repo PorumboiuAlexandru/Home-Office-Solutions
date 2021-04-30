@@ -80,7 +80,7 @@ namespace Home_Office_Solutions.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductID,Name,ProductType,Brand,Color")] StationaryItem stationaryItem)
+        public async Task<IActionResult> Create([Bind("ProductID,Name,ProductType,Brand,Color,ProductDescription")] StationaryItem stationaryItem)
         {
             if (ModelState.IsValid)
             {
@@ -112,7 +112,7 @@ namespace Home_Office_Solutions.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Name,ProductType,Brand,Color")] StationaryItem stationaryItem)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Name,ProductType,Brand,Color,ProductDescription")] StationaryItem stationaryItem)
         {
             if (id != stationaryItem.ProductID)
             {

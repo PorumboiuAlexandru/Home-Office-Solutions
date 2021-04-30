@@ -33,9 +33,14 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Color)
-        </dd>
+
     </dl>
 </div>
+<div>
+    <h6><b>Product Description</b></h6>
+    @Html.DisplayFor(model => model.ProductDescription)
+</div>
+<p></p>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ProductID">Edit</a> |
     <a asp-action="Index">Back to List</a>
