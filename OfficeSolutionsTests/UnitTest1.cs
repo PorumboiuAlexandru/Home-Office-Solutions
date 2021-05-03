@@ -1,4 +1,6 @@
+using Home_Office_Solutions.Controllers;
 using Home_Office_Solutions.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
@@ -20,7 +22,7 @@ namespace OfficeSolutionsTests
                 Assert.AreEqual(b.Name, "2019/2020 Academic Diary");
                 Assert.AreEqual(b.Brand, "Stauntons");
                 Assert.AreEqual(b.Color, "White");
-                Assert.AreEqual(b.ProductDescription, "2019 / 2020 Red White Cover Academic Diary for all your needs.");
+                Assert.AreEqual(b.ProductDescription, " 2019/2020 Red White Cover Academic Diary for all your needs.");
                 Assert.AreEqual(b.ProductType, ProductType.Diary);
             }
 
@@ -44,8 +46,45 @@ namespace OfficeSolutionsTests
                 Assert.AreEqual(st.ProductID, 1);
                 Assert.AreEqual(st.Price, 3);
             }
+            //HomeController Tests
+            [TestMethod]
+            public void Index()
+            {
+                // Arrange
+                HomeController controller = new HomeController();
 
+                // Act
+                ViewResult result = controller.Index() as ViewResult;
 
+                // Assert
+                Assert.IsNotNull(result);
+            }
+
+            [TestMethod]
+            public void AboutUs()
+            {
+                // Arrange
+                HomeController controller = new HomeController();
+
+                // Act
+                ViewResult result = controller.AboutUs() as ViewResult;
+
+                // Assert
+                Assert.IsNotNull(result);
+            }
+
+            [TestMethod]
+            public void Privacy()
+            {
+                // Arrange
+                HomeController controller = new HomeController();
+
+                // Act
+                ViewResult result = controller.Privacy() as ViewResult;
+
+                // Assert
+                Assert.IsNotNull(result);
+            }
 
         }
     }
