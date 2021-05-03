@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Home_Office_Solutions.Models;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using PagedList;
 
 namespace Home_Office_Solutions.Controllers
 {
@@ -30,11 +32,38 @@ namespace Home_Office_Solutions.Controllers
                    select new StockShopAddress { Name = st.Name, ProductID = st.ProductID, ShopName = sh.ShopName, ShopID = sh.ShopID, ShopAddress = sh.ShopAddress, Price = s.Price, StockID = s.StockID };
         }
         // GET: Stocks
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
             
 
-            return View(StockShoplist);
+            ViewData["CurrentFilter"] = searchString;
+
+            var stocks = from s in StockShoplist
+                         select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                stocks = stocks.Where(s => s.Name.Contains(searchString) || s.ShopName.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    stocks = stocks.OrderByDescending(s => s.Name);
+                    break;
+                case "Price":
+                    stocks = stocks.OrderBy(s => s.Price);
+                    break;
+                default:
+                    stocks = stocks.OrderBy(s => s.Name);
+                    break;
+
+            }
+
+
+            return View(stocks.ToList());
 /*
             var shopContext = _context.stocks.Include(s => s.Shop);
             return View(await shopContext.ToListAsync());*/
