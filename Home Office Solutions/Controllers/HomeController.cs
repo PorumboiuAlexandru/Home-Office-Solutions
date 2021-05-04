@@ -17,11 +17,6 @@ namespace Home_Office_Solutions.Controllers
         {
             _logger = logger;
         }
-
-        public HomeController()
-        {
-        }
-
         public IActionResult Index()
         {
             return View();
