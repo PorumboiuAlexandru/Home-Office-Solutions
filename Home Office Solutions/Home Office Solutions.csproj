@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Home_Office_Solutions</RootNamespace>
+    <UserSecretsId>c4ccc137-7157-4fd6-9a21-2a1aa9b07be4</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
